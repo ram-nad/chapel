@@ -20,7 +20,8 @@ PARSER_SRCS =                                                      \
               bison-chapel.cpp                                     \
               flex-chapel.cpp                                      \
               countTokens.cpp                                      \
-              parser.cpp
+              parser.cpp                                           \
+              print-tokens.cpp
 
 SRCS        = $(PARSER_SRCS)
 

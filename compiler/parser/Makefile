@@ -81,5 +81,8 @@ $(OBJ_SUBDIR)/bison-chapel.o: ../include/bison-chapel.h bison-chapel.cpp $(OBJ_S
 $(OBJ_SUBDIR)/flex-chapel.o: ../include/bison-chapel.h ../include/flex-chapel.h flex-chapel.cpp $(OBJ_SUBDIR_MADE)
 	$(CXX) -c $(COMP_CXXFLAGS) $(COMP_CXXFLAGS_NONCHPL) -o $@ flex-chapel.cpp
 
+$(OBJ_SUBDIR)/print-tokens.o: ../include/bison-chapel.h ../include/print-tokens.h $(OBJ_SUBDIR_MADE)
+	$(CXX) -c $(COMP_CXXFLAGS) $(COMP_CXXFLAGS_NONCHPL) -o $@ print-tokens.cpp
+
 $(OBJ_SUBDIR)/parser.o:  ../include/bison-chapel.h ../include/flex-chapel.h parser.cpp $(OBJ_SUBDIR_MADE)
 	$(CXX) -c $(COMP_CXXFLAGS) -o $@ parser.cpp

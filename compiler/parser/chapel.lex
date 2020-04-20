@@ -48,6 +48,7 @@
 #include "bison-chapel.h"
 #include "docsDriver.h"
 #include "parser.h"
+#include "print-tokens.h"
 
 #include <cstdio>
 
@@ -433,6 +434,10 @@ static int processToken(yyscan_t scanner, int t) {
     yy_pop_state(scanner);
   }
 
+  #ifdef CHPL_FLEX_PRINT_TOKENS
+  printToken(t);
+  #endif
+
   return t;
 }
 
@@ -460,6 +465,10 @@ static int processStringLiteral(yyscan_t scanner, const char* q, int type) {
     captureString.append(yyText);
   }
 
+  #ifdef CHPL_FLEX_PRINT_TOKENS
+  printToken(type);
+  #endif
+
   return type;
 }
 
@@ -476,6 +485,11 @@ static int processMultilineStringLiteral(yyscan_t scanner, const char* q,
     captureString.append(yyLval->pch);
     captureString.append(yyText);
   }
+
+  #ifdef CHPL_FLEX_PRINT_TOKENS
+  printToken(type);
+  #endif
+
   return type;
 }
 
@@ -603,6 +617,10 @@ static int processExtern(yyscan_t scanner) {
   // Push a state to record that "extern" has been seen
   yy_push_state(externmode, scanner);
 
+  #ifdef CHPL_FLEX_PRINT_TOKENS
+  printToken(TEXTERN);
+  #endif
+
   return TEXTERN;
 }
 
@@ -625,6 +643,10 @@ static int processExternCode(yyscan_t scanner) {
   if (captureTokens) {
     captureString.append(yyLval->pch);
   }
+
+  #ifdef CHPL_FLEX_PRINT_TOKENS
+  printToken(EXTERNCODE);
+  #endif
 
   return EXTERNCODE;
 }

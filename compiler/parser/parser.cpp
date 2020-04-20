@@ -34,6 +34,7 @@
 #include "stringutil.h"
 #include "symbol.h"
 #include "wellknown.h"
+#include "print-tokens.h"
 
 #include <cstdlib>
 
@@ -599,6 +600,7 @@ static ModuleSymbol* parseFile(const char* path,
 
     if (namedOnCommandLine == true) {
       startCountingFileTokens(path);
+      startPrintingTokens(path);
     }
 
     yylex_init(&context.scanner);
@@ -628,6 +630,7 @@ static ModuleSymbol* parseFile(const char* path,
 
     if (namedOnCommandLine == true) {
       stopCountingFileTokens(context.scanner);
+      stopPrintingTokens();
     }
 
     // Cleanup after the parser
